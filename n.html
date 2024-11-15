@@ -23,9 +23,6 @@
     }
 
     .banner {
-      background-image: url('IMG_8397.jpeg');
-      background-size: cover;
-      background-position: center;
       width: 100%;
       height: 200px;
       margin: 10px auto;
@@ -53,11 +50,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Penutup transparan */
-      z-index: 2; /* Agar overlay menutupi gambar */
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2;
     }
 
-    /* Latar belakang video untuk saldo */
     .balance-section {
       display: flex;
       justify-content: center;
@@ -67,14 +63,13 @@
       position: relative;
     }
 
-    /* Video Background untuk saldo */
     .video-background {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 200px;
-      z-index: 0; /* Agar video berada di bawah konten saldo */
+      z-index: 0;
       border: none;
     }
 
@@ -134,11 +129,14 @@
   <div class="container">
     <div class="banner">
       <h1 class="banner-title">Nama Web</h1>
-      <div class="overlay"></div> <!-- Overlay penutup gambar -->
+      <div class="overlay"></div>
     </div>
 
-    <!-- Menyematkan video background Facebook -->
-    <iframe class="video-background" src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/share/r/4FgeHxg7gxuBLYNe/?mibextid=UalRPS&autoplay=1&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <!-- Video background (menggunakan video dari GitHub) -->
+    <video class="video-background" autoplay muted loop>
+      <source src="https://github.com/username/repository_name/raw/main/assets/background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
     <div class="balance-section">
       <div class="balance-item">
