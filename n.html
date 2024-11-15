@@ -124,10 +124,11 @@
 
     /* Gambar tambahan di atas balance */
     .additional-image {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
-      object-fit: cover;
+      width: 40px; /* Ukuran gambar tambahan yang sama dengan gambar utama */
+      height: 40px;
+      position: absolute;
+      top: -45px; /* Menempatkan gambar di atas logo */
+      z-index: 1; /* Agar gambar tambahan berada di atas logo dan angka */
     }
 
     @media (max-width: 768px) {
@@ -141,8 +142,9 @@
       }
 
       .additional-image {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
+        top: -35px; /* Sesuaikan untuk perangkat lebih kecil */
       }
     }
 
@@ -157,8 +159,9 @@
       }
 
       .additional-image {
-        width: 40px;
-        height: 40px;
+        width: 25px;
+        height: 25px;
+        top: -30px; /* Sesuaikan lebih lanjut untuk perangkat lebih kecil */
       }
     }
   </style>
@@ -174,25 +177,25 @@
 
     <div class="balance-section">
       <div class="balance-item">
-        <!-- Gambar tambahan di atas balance -->
+        <!-- Gambar tambahan dan penutup disamakan -->
+        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
       </div>
       <div class="balance-item">
-        <!-- Gambar tambahan di atas balance -->
+        <!-- Gambar tambahan dan penutup disamakan -->
+        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
       </div>
       <div class="balance-item">
-        <!-- Gambar tambahan di atas balance -->
+        <!-- Gambar tambahan dan penutup disamakan -->
+        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
       </div>
     </div>
   </div>
