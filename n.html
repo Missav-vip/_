@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner Foto dengan Teks di Dalam</title>
+  <title>Banner dengan Overlay</title>
   <style>
     body {
       margin: 0;
@@ -23,9 +23,6 @@
     }
 
     .banner {
-      background-image: url('IMG_8397.jpeg');
-      background-size: cover;
-      background-position: center;
       width: 100%;
       height: 200px;
       margin: 10px auto;
@@ -37,30 +34,40 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      animation: glowAnimation 1.5s infinite alternate;
-    }
-
-    @keyframes glowAnimation {
-      0% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
-      }
+      position: relative;
+      overflow: hidden;
     }
 
     .banner-title {
       font-size: 32px;
       margin: 10px 0;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      z-index: 1;
     }
 
-    .banner-subtitle {
-      font-size: 24px;
-      margin: 5px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    /* Overlay transparan */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2;
     }
 
+    /* Menambahkan Video sebagai latar belakang */
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Membuat video menutupi seluruh area */
+      z-index: -1;
+    }
+
+    /* Tampilan untuk item saldo */
     .balance-section {
       display: flex;
       justify-content: center;
@@ -91,43 +98,11 @@
       width: 40px;
       height: 40px;
       margin-bottom: 5px;
-      animation: bounce 1s infinite alternate;
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
     }
 
     .balance-item span {
       font-size: 14px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    /* Penutup Gambar (Overlay) */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%; /* Menutupi seluruh area gambar */
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8); /* Warna hitam transparan */
-      z-index: 1; /* Agar overlay berada di atas logo dan angka */
-    }
-
-    /* Gambar tambahan di atas balance */
-    .additional-image {
-      width: 40px; /* Ukuran gambar tambahan yang sama dengan gambar utama */
-      height: 40px;
-      position: absolute;
-      top: -45px; /* Menempatkan gambar di atas logo */
-      left: 0; /* Menjaga agar gambar tidak bergeser ke samping */
-      display: block;
-      z-index: 2; /* Agar gambar tambahan berada di atas overlay */
     }
 
     @media (max-width: 768px) {
@@ -138,12 +113,6 @@
 
       .balance-item span {
         font-size: 12px;
-      }
-
-      .additional-image {
-        width: 30px;
-        height: 30px;
-        top: -35px; /* Sesuaikan untuk perangkat lebih kecil */
       }
     }
 
@@ -156,46 +125,32 @@
       .balance-item span {
         font-size: 10px;
       }
-
-      .additional-image {
-        width: 25px;
-        height: 25px;
-        top: -30px; /* Sesuaikan lebih lanjut untuk perangkat lebih kecil */
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Latar Belakang Video -->
     <div class="banner">
+      <video autoplay muted loop class="background-video">
+        <source src="https://www.instagram.com/reel/DCZz0XpqVqd/?igsh=azNidncyNDJneHE3" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
       <h1 class="banner-title">Nama Web</h1>
-      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
-      <h3 class="banner-subtitle">Nama Lainnya</h3>
-      <h4 class="banner-subtitle">Nama Lainnya</h4>
+      <div class="overlay"></div> <!-- Overlay penutup gambar -->
     </div>
 
+    <!-- Bagian Saldo -->
     <div class="balance-section">
       <div class="balance-item">
-        <!-- Penutup Gambar -->
-        <div class="overlay"></div>
-        <!-- Gambar tambahan di atas balance -->
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
       <div class="balance-item">
-        <!-- Penutup Gambar -->
-        <div class="overlay"></div>
-        <!-- Gambar tambahan di atas balance -->
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
       </div>
       <div class="balance-item">
-        <!-- Penutup Gambar -->
-        <div class="overlay"></div>
-        <!-- Gambar tambahan di atas balance -->
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
       </div>
