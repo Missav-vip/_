@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner Foto dengan Teks di Dalam</title>
+  <title>Latar Belakang Saldo dengan Video</title>
   <style>
     body {
       margin: 0;
@@ -23,9 +23,7 @@
     }
 
     .banner {
-      background-image: url('IMG_8397.jpeg');
-      background-size: cover;
-      background-position: center;
+      background-color: #111;
       width: 100%;
       height: 200px;
       margin: 10px auto;
@@ -37,16 +35,6 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      animation: glowAnimation 1.5s infinite alternate;
-    }
-
-    @keyframes glowAnimation {
-      0% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
-      }
     }
 
     .banner-title {
@@ -55,120 +43,38 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    .banner-subtitle {
-      font-size: 24px;
-      margin: 5px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    @media (max-width: 480px) {
-      .banner {
-        height: 100px;
-      }
-      .banner-title { font-size: 18px; }
-      .banner-subtitle { font-size: 14px; }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
-      .banner {
-        height: 150px;
-      }
-      .banner-title { font-size: 22px; }
-      .banner-subtitle { font-size: 18px; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .banner {
-        height: 200px;
-      }
-      .banner-title { font-size: 26px; }
-      .banner-subtitle { font-size: 20px; }
-    }
-
-    @media (min-width: 1025px) {
-      .banner {
-        height: 300px;
-      }
-      .banner-title { font-size: 32px; }
-      .banner-subtitle { font-size: 24px; }
-    }
-
-    .photo-carousel a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .photo-item div {
-      font-size: 14px;
-      margin-top: 5px;
-    }
-
-    .image-gallery {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      margin-top: 20px;
-      padding: 10px 0;
-    }
-
-    .gallery-item {
-      flex: 0 0 auto;
-      width: 150px;
-      height: 150px;
-      border-radius: 10px;
-      background-color: #333;
-      overflow: hidden;
+    .balance-section {
       position: relative;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      width: 100%;
+      max-width: 1200px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
     }
 
-    .gallery-item img {
+    .balance-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .gallery-item div {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      text-align: center;
-      padding: 5px;
-      font-size: 14px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-    }
-
-    .balance-section {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 15px;
+      z-index: -1;
     }
 
     .balance-item {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0 15px;
       color: white;
-      margin-bottom: 15px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-      padding: 10px;
-      border-radius: 10px;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    .balance-item:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+      z-index: 1;
     }
 
     .balance-item img {
@@ -178,6 +84,11 @@
       animation: bounce 1s infinite alternate;
     }
 
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
     @keyframes bounce {
       0% {
         transform: translateY(0);
@@ -185,11 +96,6 @@
       100% {
         transform: translateY(-10px);
       }
-    }
-
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     @media (max-width: 768px) {
@@ -219,12 +125,13 @@
   <div class="container">
     <div class="banner">
       <h1 class="banner-title">Nama Web</h1>
-      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
-      <h3 class="banner-subtitle">Nama Lainnya</h3>
-      <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
     <div class="balance-section">
+      <video autoplay muted loop>
+        <source src="https://raw.githubusercontent.com/Missav-vip/_/7bea1423ee6b2542a3c635deb096a9bea31a5f89/background%20.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video HTML5.
+      </video>
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
@@ -238,42 +145,6 @@
         <span>7337733663638833</span>
       </div>
     </div>
-
-    <div class="image-gallery">
-      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
-        <img src="img/IMG_8331.png" alt="USA">
-        <div>AMERICA</div>
-      </div>
-      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
-        <img src="img/IMG_8331.png" alt="RUSIA">
-        <div>RUSIA</div>
-      </div>
-      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
-        <img src="img/IMG_8331.png" alt="CANADA">
-        <div>CANADA</div>
-      </div>
-      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
-        <img src="img/IMG_8331.png" alt="PHILIPINA">
-        <div>PHILIPINA</div>
-      </div>
-    </div>
   </div>
-
-  <script>
-    function checkStorageAndDownload(sizeInZB) {
-      if (navigator.storage && navigator.storage.estimate) {
-        navigator.storage.estimate().then((storage) => {
-          const availableSpace = storage.quota - storage.usage;
-          if (availableSpace >= sizeInZB * Math.pow(1024, 3)) {
-            window.location.href = 'your-download-url';
-          } else {
-            alert('Insufficient storage space.');
-          }
-        });
-      } else {
-        alert('Storage API not supported.');
-      }
-    }
-  </script>
 </body>
 </html>
