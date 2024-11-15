@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner dengan Overlay</title>
+  <title>Banner Video dengan Teks di Dalam</title>
   <style>
     body {
       margin: 0;
@@ -38,6 +38,16 @@
       overflow: hidden;
     }
 
+    .banner iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: -1; /* Agar video berada di belakang teks */
+    }
+
     .banner-title {
       font-size: 32px;
       margin: 10px 0;
@@ -45,29 +55,13 @@
       z-index: 1;
     }
 
-    /* Overlay transparan */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 2;
+    .banner-subtitle {
+      font-size: 24px;
+      margin: 5px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      z-index: 1;
     }
 
-    /* Menambahkan Video sebagai latar belakang */
-    .background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Membuat video menutupi seluruh area */
-      z-index: -1;
-    }
-
-    /* Tampilan untuk item saldo */
     .balance-section {
       display: flex;
       justify-content: center;
@@ -98,11 +92,32 @@
       width: 40px;
       height: 40px;
       margin-bottom: 5px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
     }
 
     .balance-item span {
       font-size: 14px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Gambar tambahan di atas balance */
+    .additional-image {
+      width: 40px; /* Ukuran gambar tambahan yang sama dengan gambar utama */
+      height: 40px;
+      position: absolute;
+      top: -45px; /* Menempatkan gambar di atas logo */
+      left: 0; /* Menjaga agar gambar tidak bergeser ke samping */
+      display: block;
+      z-index: 2; /* Agar gambar tambahan berada di atas overlay */
     }
 
     @media (max-width: 768px) {
@@ -113,6 +128,12 @@
 
       .balance-item span {
         font-size: 12px;
+      }
+
+      .additional-image {
+        width: 30px;
+        height: 30px;
+        top: -35px; /* Sesuaikan untuk perangkat lebih kecil */
       }
     }
 
@@ -125,32 +146,41 @@
       .balance-item span {
         font-size: 10px;
       }
+
+      .additional-image {
+        width: 25px;
+        height: 25px;
+        top: -30px; /* Sesuaikan lebih lanjut untuk perangkat lebih kecil */
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Latar Belakang Video -->
     <div class="banner">
-      <video autoplay muted loop class="background-video">
-        <source src="https://youtube.com/watch?v=s0m86h0jxnY&si=d-4yC55YCRnbAQKC" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <!-- Video YouTube Embed -->
+      <iframe src="https://www.youtube.com/embed/s0m86h0jxnY?autoplay=1&mute=1&loop=1&playlist=s0m86h0jxnY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- Teks di atas video -->
       <h1 class="banner-title">Nama Web</h1>
-      <div class="overlay"></div> <!-- Overlay penutup gambar -->
+      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
+      <h3 class="banner-subtitle">Nama Lainnya</h3>
+      <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
-    <!-- Bagian Saldo -->
     <div class="balance-section">
       <div class="balance-item">
+        <!-- Gambar tambahan di atas balance -->
+        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
       <div class="balance-item">
+        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
       </div>
       <div class="balance-item">
+        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
       </div>
