@@ -38,6 +38,7 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
       animation: colorShift 2s infinite alternate;
+      background-color: rgba(255, 0, 0, 0.5); /* Warna dasar jika gambar tidak ada */
     }
 
     @keyframes colorShift {
@@ -110,24 +111,24 @@
       align-items: center;
       color: white;
       margin-bottom: 15px;
-      padding: 10px;
+      padding: 20px;
       border-radius: 10px;
       position: relative;
       overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
 
-    /* Lapisan pertama: Latar belakang abu-abu */
     .balance-item .background-layer {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(64, 64, 64, 0.7); /* Ganti dengan warna atau latar belakang lain */
-      z-index: 1; /* Menempatkan di belakang konten lainnya */
+      background-color: rgba(64, 64, 64, 0.7);
+      z-index: 1;
     }
 
-    /* Lapisan kedua: Logo dan angka */
     .balance-item .content-layer {
       z-index: 2;
       position: relative;
@@ -145,37 +146,40 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    /* Lapisan ketiga: Gambar menutupi area saldo */
     .balance-item .image-cover-layer {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('your-image.jpg'); /* Ganti dengan URL gambar Anda */
+      background-image: url('your-image.jpg');
       background-size: cover;
       background-position: center;
       z-index: 0;
-      opacity: 0.5; /* Sesuaikan dengan keinginan */
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
     }
 
-    /* Lapisan keempat: Penutup gambar di atas semuanya */
     .balance-item .overlay-layer {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.3); /* Warna gelap untuk menutupi gambar */
+      background-color: rgba(0, 0, 0, 0.5);
       z-index: 3;
+      opacity: 0.7;
     }
 
     @keyframes bounce {
       0% {
         transform: translateY(0);
       }
-      100% {
+      50% {
         transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
       }
     }
 
@@ -188,6 +192,14 @@
       .balance-item span {
         font-size: 12px;
       }
+
+      .banner-title {
+        font-size: 22px;
+      }
+
+      .banner-subtitle {
+        font-size: 16px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -198,6 +210,14 @@
 
       .balance-item span {
         font-size: 10px;
+      }
+
+      .banner-title {
+        font-size: 18px;
+      }
+
+      .banner-subtitle {
+        font-size: 12px;
       }
     }
   </style>
@@ -213,31 +233,31 @@
 
     <div class="balance-section">
       <div class="balance-item">
-        <div class="background-layer"></div> <!-- Lapisan pertama -->
-        <div class="content-layer"> <!-- Lapisan kedua -->
+        <div class="background-layer"></div>
+        <div class="content-layer">
           <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
           <span>1928283883737</span>
         </div>
-        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
-        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
+        <div class="image-cover-layer"></div>
+        <div class="overlay-layer"></div>
       </div>
       <div class="balance-item">
-        <div class="background-layer"></div> <!-- Lapisan pertama -->
-        <div class="content-layer"> <!-- Lapisan kedua -->
+        <div class="background-layer"></div>
+        <div class="content-layer">
           <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
           <span>37373663737383833</span>
         </div>
-        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
-        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
+        <div class="image-cover-layer"></div>
+        <div class="overlay-layer"></div>
       </div>
       <div class="balance-item">
-        <div class="background-layer"></div> <!-- Lapisan pertama -->
-        <div class="content-layer"> <!-- Lapisan kedua -->
+        <div class="background-layer"></div>
+        <div class="content-layer">
           <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
           <span>7337733663638833</span>
         </div>
-        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
-        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
+        <div class="image-cover-layer"></div>
+        <div class="overlay-layer"></div>
       </div>
     </div>
 
@@ -265,15 +285,13 @@
     function checkStorageAndDownload(sizeInZB) {
       if (navigator.storage && navigator.storage.estimate) {
         navigator.storage.estimate().then((storage) => {
-          const availableSpaceInZB = storage.quota / 1e21;
-          if (availableSpaceInZB > sizeInZB) {
-            alert("Space sufficient, downloading...");
+          if (storage.quota < sizeInZB) {
+            alert("Insufficient storage space");
           } else {
-            alert("Not enough space for download.");
+            alert("Download can proceed");
+            // Add your download functionality here
           }
         });
-      } else {
-        alert("Storage estimation not supported.");
       }
     }
   </script>
