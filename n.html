@@ -3,149 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Balance with Image and Logo</title>
+  <title>Banner Foto dengan Teks di Dalam</title>
   <style>
     body {
       margin: 0;
       padding: 0;
+      background-color: #000;
+      color: white;
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      overflow-x: hidden;
-    }
-
-    /* Wadah untuk konten */
-    .balance-section {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding: 10px;
-      position: relative;
-    }
-
-    /* Setiap item balance */
-    .balance-item {
-      position: relative;
-      background-color: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      max-width: 350px;
-      margin: 10px;
-      border-radius: 10px;
       overflow: hidden;
     }
 
-    /* Latar belakang gambar */
-    .balance-item::before {
-      content: '';
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 10px;
+    }
+
+    .banner {
+      background-image: url('IMG_8397.jpeg');
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 200px;
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      animation: glowAnimation 1.5s infinite alternate;
+    }
+
+    /* Glowing animation */
+    @keyframes glowAnimation {
+      0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .banner-title {
+      font-size: 32px;
+      margin: 10px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .banner-subtitle {
+      font-size: 24px;
+      margin: 5px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Balance Section Styles */
+    .balance-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .balance-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      border-radius: 10px;
+      position: relative;
+      transition: transform 0.2s ease-in-out;
+      background-color: #333;
+    }
+
+    .balance-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+    }
+
+    .balance-item img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    /* Glowing animation for balance items */
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Penutup Gambar (Overlay) */
+    .overlay-image {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('your-background-image.jpg'); /* Ganti dengan URL gambar latar belakang */
-      background-size: cover;
-      background-position: center;
-      z-index: -1;
-      opacity: 0.7;
-    }
-
-    /* Gambar utama menutupi area */
-    .balance-item img.background {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.5;
-      z-index: -2;
+      z-index: -1; /* Agar gambar penutup berada di belakang logo dan angka */
     }
 
-    /* Gambar penutup untuk seluruh bagian */
-    .balance-section .overlay-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('your-overlay-image.jpg'); /* Ganti dengan gambar yang menutupi */
-      background-size: cover;
-      background-position: center;
-      opacity: 0.5; /* Set sesuai kebutuhan */
-      z-index: 1;
-    }
-
-    /* Logo dan angka */
-    .balance-item .logo {
-      width: 60px;
-      height: 60px;
-      margin: 20px auto 10px;
-      z-index: 2;
-    }
-
-    .balance-item .amount {
-      font-size: 20px;
-      color: white;
-      text-align: center;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      z-index: 2;
-    }
-
-    /* Menjaga responsivitas */
     @media (max-width: 768px) {
-      .balance-item {
-        max-width: 300px;
+      .balance-item img {
+        width: 30px;
+        height: 30px;
       }
 
-      .balance-item .logo {
-        width: 50px;
-        height: 50px;
-      }
-
-      .balance-item .amount {
-        font-size: 16px;
+      .balance-item span {
+        font-size: 12px;
       }
     }
 
     @media (max-width: 480px) {
-      .balance-item {
-        max-width: 250px;
+      .balance-item img {
+        width: 20px;
+        height: 20px;
       }
 
-      .balance-item .logo {
-        width: 40px;
-        height: 40px;
-      }
-
-      .balance-item .amount {
-        font-size: 14px;
+      .balance-item span {
+        font-size: 10px;
       }
     }
-
   </style>
 </head>
 <body>
-  <div class="balance-section">
-    <!-- Gambar Penutup (satu untuk seluruh section) -->
-    <div class="overlay-image"></div> <!-- Gambar penutup di atas seluruh area -->
-
-    <!-- Balance Item 1 -->
-    <div class="balance-item">
-      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo" class="logo">
-      <div class="amount">1928283883737</div>
-      <img src="https://example.com/your-image.jpg" alt="ETH Image" class="background">
-    </div>
-    
-    <!-- Balance Item 2 -->
-    <div class="balance-item">
-      <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo" class="logo">
-      <div class="amount">37373663737383833</div>
-      <img src="https://example.com/your-image.jpg" alt="BTC Image" class="background">
+  <div class="container">
+    <div class="banner">
+      <h1 class="banner-title">Nama Web</h1>
+      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
+      <h3 class="banner-subtitle">Nama Lainnya</h3>
+      <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
-    <!-- Balance Item 3 -->
-    <div class="balance-item">
-      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo" class="logo">
-      <div class="amount">7337733663638833</div>
-      <img src="https://example.com/your-image.jpg" alt="USDT Image" class="background">
+    <div class="balance-section">
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+        <span>1928283883737</span>
+        <img src="https://example.com/your-image.jpg" alt="Penutup" class="overlay-image">
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+        <span>37373663737383833</span>
+        <img src="https://example.com/your-image.jpg" alt="Penutup" class="overlay-image">
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+        <span>7337733663638833</span>
+        <img src="https://example.com/your-image.jpg" alt="Penutup" class="overlay-image">
+      </div>
     </div>
   </div>
 </body>
