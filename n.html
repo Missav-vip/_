@@ -23,7 +23,10 @@
     }
 
     .banner {
-      background-color: #333;
+      background-image: url('IMG_8397.jpeg');
+      background-size: cover;
+      background-position: center;
+      width: 100%;
       height: 200px;
       margin: 10px auto;
       display: flex;
@@ -33,6 +36,7 @@
       color: white;
       text-align: center;
       border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
       position: relative;
     }
 
@@ -71,6 +75,7 @@
       width: 100%;
       height: 200px;
       z-index: 0; /* Agar video berada di bawah konten saldo */
+      border: none;
     }
 
     .balance-item {
@@ -127,17 +132,15 @@
 </head>
 <body>
   <div class="container">
-    <!-- Banner -->
     <div class="banner">
       <h1 class="banner-title">Nama Web</h1>
       <div class="overlay"></div> <!-- Overlay penutup gambar -->
     </div>
 
-    <!-- Latar Belakang Video untuk Saldo -->
-    <div class="balance-section">
-      <iframe class="video-background" src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/share/r/7kEemYyoCi4E9rWT/?mibextid=UalRPS&autoplay=1&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <!-- Menyematkan video background Facebook -->
+    <iframe class="video-background" src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/share/r/4FgeHxg7gxuBLYNe/?mibextid=UalRPS&autoplay=1&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-      <!-- Konten Saldo -->
+    <div class="balance-section">
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
