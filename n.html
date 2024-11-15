@@ -21,6 +21,7 @@
       gap: 20px;
       flex-wrap: wrap;
       padding: 10px;
+      position: relative;
     }
 
     /* Setiap item balance */
@@ -49,7 +50,7 @@
       opacity: 0.7;
     }
 
-    /* Gambar yang menutupi area */
+    /* Gambar utama menutupi area */
     .balance-item img.background {
       width: 100%;
       height: 100%;
@@ -58,11 +59,26 @@
       z-index: -2;
     }
 
+    /* Gambar penutup untuk seluruh bagian */
+    .balance-section .overlay-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('your-overlay-image.jpg'); /* Ganti dengan gambar yang menutupi */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5; /* Set sesuai kebutuhan */
+      z-index: 1;
+    }
+
     /* Logo dan angka */
     .balance-item .logo {
       width: 60px;
       height: 60px;
       margin: 20px auto 10px;
+      z-index: 2;
     }
 
     .balance-item .amount {
@@ -70,6 +86,7 @@
       color: white;
       text-align: center;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      z-index: 2;
     }
 
     /* Menjaga responsivitas */
@@ -107,6 +124,9 @@
 </head>
 <body>
   <div class="balance-section">
+    <!-- Gambar Penutup (satu untuk seluruh section) -->
+    <div class="overlay-image"></div> <!-- Gambar penutup di atas seluruh area -->
+
     <!-- Balance Item 1 -->
     <div class="balance-item">
       <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo" class="logo">
