@@ -40,7 +40,6 @@
       animation: glowAnimation 1.5s infinite alternate;
     }
 
-    /* Glowing animation */
     @keyframes glowAnimation {
       0% {
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
@@ -62,7 +61,6 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    /* Balance Section Styles */
     .balance-section {
       display: flex;
       justify-content: center;
@@ -81,7 +79,7 @@
       border-radius: 10px;
       position: relative;
       transition: transform 0.2s ease-in-out;
-      background-color: transparent; /* Menghapus latar belakang abu-abu */
+      background-color: transparent;
     }
 
     .balance-item:hover {
@@ -96,7 +94,6 @@
       animation: bounce 1s infinite alternate;
     }
 
-    /* Glowing animation for balance items */
     @keyframes bounce {
       0% {
         transform: translateY(0);
@@ -112,14 +109,14 @@
     }
 
     /* Penutup Gambar (Overlay) */
-    .overlay-image {
+    .overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 100%; /* Menutupi seluruh area gambar */
       height: 100%;
-      object-fit: cover;
-      z-index: -1; /* Agar gambar penutup berada di belakang logo dan angka */
+      background-color: rgba(0, 0, 0, 0.8); /* Warna hitam transparan */
+      z-index: 1; /* Agar overlay berada di atas logo dan angka */
     }
 
     /* Gambar tambahan di atas balance */
@@ -128,7 +125,9 @@
       height: 40px;
       position: absolute;
       top: -45px; /* Menempatkan gambar di atas logo */
-      z-index: 1; /* Agar gambar tambahan berada di atas logo dan angka */
+      left: 0; /* Menjaga agar gambar tidak bergeser ke samping */
+      display: block;
+      z-index: 2; /* Agar gambar tambahan berada di atas overlay */
     }
 
     @media (max-width: 768px) {
@@ -177,22 +176,25 @@
 
     <div class="balance-section">
       <div class="balance-item">
-        <!-- Gambar tambahan dan penutup disamakan -->
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
+        <!-- Penutup Gambar -->
+        <div class="overlay"></div>
+        <!-- Gambar tambahan di atas balance -->
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
       <div class="balance-item">
-        <!-- Gambar tambahan dan penutup disamakan -->
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
+        <!-- Penutup Gambar -->
+        <div class="overlay"></div>
+        <!-- Gambar tambahan di atas balance -->
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
       </div>
       <div class="balance-item">
-        <!-- Gambar tambahan dan penutup disamakan -->
-        <img src="IMG_8405.png" alt="Penutup" class="overlay-image">
+        <!-- Penutup Gambar -->
+        <div class="overlay"></div>
+        <!-- Gambar tambahan di atas balance -->
         <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
