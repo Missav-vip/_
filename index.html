@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latar Belakang Saldo dengan Video Instagram</title>
+  <title>Latar Belakang Saldo dengan Video</title>
   <style>
     body {
       margin: 0;
@@ -11,118 +11,122 @@
       background-color: #000;
       color: white;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
     }
 
     .banner {
-      background-color: #111;
-      width: 100%;
-      max-width: 1200px;
-      height: 200px;
+      background-color: #333;
+      height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
+      font-size: 24px;
       text-align: center;
       border-radius: 10px;
-      margin: 20px 0;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-    }
-
-    .banner-title {
-      font-size: 32px;
-      margin: 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px; /* Jarak ke saldo */
     }
 
     .balance-section {
       position: relative;
       width: 100%;
-      height: 30vh; /* Tinggi 30% dari tinggi layar perangkat */
-      margin: 20px 0;
-      overflow: hidden;
-      border-radius: 10px;
+      height: 200px; /* Tinggi video */
+      margin-bottom: 20px;
     }
 
-    .instagram-video {
+    .balance-section iframe {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; /* Lebar penuh sesuai perangkat */
+      height: 100%; /* Tinggi sesuai yang diatur */
       border: none;
-      z-index: -1;
     }
 
-    .balance-items {
+    .balance-content {
+      position: relative;
+      z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
-      position: relative;
-      z-index: 1;
       color: white;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      font-size: 18px;
     }
 
     .balance-item {
-      margin: 0 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin: 0 15px;
+      text-align: center;
     }
 
     .balance-item img {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       margin-bottom: 10px;
+    }
+
+    .balance-item span {
+      display: block;
+      font-size: 14px;
     }
 
     @media (max-width: 768px) {
       .balance-item img {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
+      }
+
+      .balance-item span {
+        font-size: 12px;
       }
     }
 
     @media (max-width: 480px) {
       .balance-item img {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .balance-item span {
+        font-size: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="banner">
-    <h1 class="banner-title">Nama Web</h1>
-  </div>
+  <div class="container">
+    <!-- Banner -->
+    <div class="banner">
+      <h1>Nama Web</h1>
+    </div>
 
-  <div class="balance-section">
-    <!-- Video Instagram -->
-    <iframe 
-      class="instagram-video"
-      src=""
-      allowfullscreen
-      scrolling="no"
-      frameborder="0">
-    </iframe>
-
-    <!-- Konten Saldo -->
-    <div class="balance-items">
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
-        <span>1928283883737</span>
-      </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-        <span>37373663737383833</span>
-      </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-        <span>7337733663638833</span>
+    <!-- Latar Belakang Saldo dengan Video -->
+    <div class="balance-section">
+      <iframe 
+        src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/share/v/6aDvcdbQSJZsmpdH/?mibextid=WC7FNe&autoplay=1&mute=0" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
+      </iframe>
+      <div class="balance-content">
+        <div class="balance-item">
+          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+          <span>1928283883737</span>
+        </div>
+        <div class="balance-item">
+          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+          <span>37373663737383833</span>
+        </div>
+        <div class="balance-item">
+          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+          <span>7337733663638833</span>
+        </div>
       </div>
     </div>
   </div>
