@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner Foto dengan Teks di Dalam</title>
+  <title>Balance Section with 4 Layers</title>
   <style>
     body {
       margin: 0;
@@ -11,86 +11,6 @@
       background-color: #000;
       color: white;
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      padding: 10px;
-    }
-
-    .banner {
-      background-image: url('IMG_8397.jpeg');
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      height: 200px;
-      margin: 10px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      animation: glowAnimation 1.5s infinite alternate;
-    }
-
-    @keyframes glowAnimation {
-      0% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
-      }
-    }
-
-    .banner-title {
-      font-size: 32px;
-      margin: 10px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    .banner-subtitle {
-      font-size: 24px;
-      margin: 5px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    @media (max-width: 480px) {
-      .banner {
-        height: 100px;
-      }
-      .banner-title { font-size: 18px; }
-      .banner-subtitle { font-size: 14px; }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
-      .banner {
-        height: 150px;
-      }
-      .banner-title { font-size: 22px; }
-      .banner-subtitle { font-size: 18px; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .banner {
-        height: 200px;
-      }
-      .banner-title { font-size: 26px; }
-      .banner-subtitle { font-size: 20px; }
-    }
-
-    @media (min-width: 1025px) {
-      .banner {
-        height: 300px;
-      }
-      .banner-title { font-size: 32px; }
-      .banner-subtitle { font-size: 24px; }
     }
 
     .balance-section {
@@ -107,85 +27,130 @@
       align-items: center;
       color: white;
       margin-bottom: 15px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
       padding: 10px;
       border-radius: 10px;
-      transition: transform 0.2s ease-in-out;
+      position: relative;
+      width: 200px; /* Added width for consistency */
+      height: 250px; /* Added height */
+      overflow: hidden;
     }
 
+    /* Layer 1: Background color */
+    .balance-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7); /* Transparent black */
+      z-index: 1;
+    }
+
+    /* Layer 2: Background Image */
+    .balance-item img.background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      object-fit: cover;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Layer 3: Logo and Numbers */
+    .balance-item .logo-and-number {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .balance-item img.logo {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+    }
+
+    .balance-item span {
+      font-size: 18px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Layer 4: Top Image (Covering Entire Item) */
+    .balance-item .overlay-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      background-image: url('https://cryptologos.cc/logos/ethereum-eth-logo.png'); /* Your image here */
+      background-size: cover;
+      opacity: 0.3; /* Adjust opacity to make the image overlay more subtle */
+    }
+
+    /* Hover Effect */
     .balance-item:hover {
       transform: scale(1.1);
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
     }
 
-    .balance-item img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-      animation: bounce 1s infinite alternate;
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
     @media (max-width: 768px) {
-      .balance-item img {
+      .balance-item img.logo {
         width: 30px;
         height: 30px;
+      }
+
+      .balance-item span {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .balance-item img.logo {
+        width: 20px;
+        height: 20px;
       }
 
       .balance-item span {
         font-size: 12px;
       }
     }
-
-    @media (max-width: 480px) {
-      .balance-item img {
-        width: 20px;
-        height: 20px;
-      }
-
-      .balance-item span {
-        font-size: 10px;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="banner">
-      <h1 class="banner-title">Nama Web</h1>
-      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
-      <h3 class="banner-subtitle">Nama Lainnya</h3>
-      <h4 class="banner-subtitle">Nama Lainnya</h4>
-    </div>
-
-    <div class="balance-section">
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+  <div class="balance-section">
+    <div class="balance-item">
+      <img class="background" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Background Image">
+      <div class="logo-and-number">
+        <img class="logo" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-        <span>37373663737383833</span>
-      </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-        <span>7337733663638833</span>
-      </div>
+      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
     </div>
 
+    <div class="balance-item">
+      <img class="background" src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Background Image">
+      <div class="logo-and-number">
+        <img class="logo" src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+        <span>37373663737383833</span>
+      </div>
+      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
+    </div>
+
+    <div class="balance-item">
+      <img class="background" src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Background Image">
+      <div class="logo-and-number">
+        <img class="logo" src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+        <span>7337733663638833</span>
+      </div>
+      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
+    </div>
   </div>
 </body>
 </html>
