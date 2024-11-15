@@ -37,27 +37,18 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      animation: glowAnimation 1.5s infinite alternate, mutateAnimation 3s infinite;
+      animation: colorShift 2s infinite alternate;
     }
 
-    @keyframes glowAnimation {
+    @keyframes colorShift {
       0% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
-      }
-    }
-
-    @keyframes mutateAnimation {
-      0% {
-        transform: scale(1);
+        background-color: red;
       }
       50% {
-        transform: scale(1.05);
+        background-color: darkred;
       }
       100% {
-        transform: scale(1);
+        background-color: red;
       }
     }
 
@@ -114,6 +105,7 @@
     }
 
     .balance-item {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,15 +113,31 @@
       margin-bottom: 15px;
       padding: 10px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-      transition: transform 0.2s ease-in-out;
-      background: linear-gradient(145deg, rgba(64, 64, 64, 0.7), rgba(32, 32, 32, 0.5));
-      position: relative;
+      width: 200px; /* Menentukan lebar kotak saldo */
+      height: 100px; /* Menentukan tinggi kotak saldo */
+      overflow: hidden;
     }
 
-    .balance-item:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+    /* Lapisan pertama: Latar belakang abu-abu */
+    .balance-item .background-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(64, 64, 64, 0.7); /* Ganti dengan warna atau latar belakang lain */
+      z-index: 1; /* Menempatkan di belakang konten lainnya */
+    }
+
+    /* Lapisan kedua: Logo dan angka */
+    .balance-item .content-layer {
+      z-index: 2;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
     }
 
     .balance-item img {
@@ -139,6 +147,36 @@
       animation: bounce 1s infinite alternate;
     }
 
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Lapisan ketiga: Gambar menutupi area saldo */
+    .balance-item .image-cover-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('your-image.jpg'); /* Ganti dengan URL gambar Anda */
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      opacity: 0.5; /* Sesuaikan dengan keinginan */
+    }
+
+    /* Lapisan keempat: Penutup gambar di atas semuanya */
+    .balance-item .overlay-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3); /* Warna gelap untuk menutupi gambar */
+      z-index: 3;
+    }
+
     @keyframes bounce {
       0% {
         transform: translateY(0);
@@ -146,22 +184,6 @@
       100% {
         transform: translateY(-10px);
       }
-    }
-
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    .balance-item .background-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: -1;
-      border-radius: 10px;
     }
 
     @media (max-width: 768px) {
@@ -198,19 +220,31 @@
 
     <div class="balance-section">
       <div class="balance-item">
-        <div class="background-overlay"></div>
-        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
-        <span>1928283883737</span>
+        <div class="background-layer"></div> <!-- Lapisan pertama -->
+        <div class="content-layer"> <!-- Lapisan kedua -->
+          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+          <span>1928283883737</span>
+        </div>
+        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
+        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
       </div>
       <div class="balance-item">
-        <div class="background-overlay"></div>
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-        <span>37373663737383833</span>
+        <div class="background-layer"></div> <!-- Lapisan pertama -->
+        <div class="content-layer"> <!-- Lapisan kedua -->
+          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+          <span>37373663737383833</span>
+        </div>
+        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
+        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
       </div>
       <div class="balance-item">
-        <div class="background-overlay"></div>
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-        <span>7337733663638833</span>
+        <div class="background-layer"></div> <!-- Lapisan pertama -->
+        <div class="content-layer"> <!-- Lapisan kedua -->
+          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+          <span>7337733663638833</span>
+        </div>
+        <div class="image-cover-layer"></div> <!-- Lapisan ketiga -->
+        <div class="overlay-layer"></div> <!-- Lapisan keempat -->
       </div>
     </div>
 
