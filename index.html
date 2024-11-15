@@ -37,19 +37,16 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      animation: colorShift 2s infinite alternate;
-      background-color: rgba(255, 0, 0, 0.5); /* Warna dasar jika gambar tidak ada */
+      animation: glowAnimation 1.5s infinite alternate;
     }
 
-    @keyframes colorShift {
+    /* Glowing animation */
+    @keyframes glowAnimation {
       0% {
-        background-color: red;
-      }
-      50% {
-        background-color: darkred;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
       }
       100% {
-        background-color: red;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
       }
     }
 
@@ -99,10 +96,10 @@
 
     .balance-section {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       margin-top: 20px;
-      gap: 15px;
       flex-wrap: wrap;
+      gap: 15px;
     }
 
     .balance-item {
@@ -111,27 +108,15 @@
       align-items: center;
       color: white;
       margin-bottom: 15px;
-      padding: 20px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      padding: 10px;
       border-radius: 10px;
-      position: relative;
-      overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease-in-out;
     }
 
-    .balance-item .background-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(64, 64, 64, 0.7);
-      z-index: 1;
-    }
-
-    .balance-item .content-layer {
-      z-index: 2;
-      position: relative;
+    .balance-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
     }
 
     .balance-item img {
@@ -141,46 +126,19 @@
       animation: bounce 1s infinite alternate;
     }
 
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    .balance-item .image-cover-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('your-image.jpg');
-      background-size: cover;
-      background-position: center;
-      z-index: 0;
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
-    }
-
-    .balance-item .overlay-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 3;
-      opacity: 0.7;
-    }
-
+    /* Glowing animation for balance items */
     @keyframes bounce {
       0% {
         transform: translateY(0);
       }
-      50% {
+      100% {
         transform: translateY(-10px);
       }
-      100% {
-        transform: translateY(0);
-      }
+    }
+
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     @media (max-width: 768px) {
@@ -191,14 +149,6 @@
 
       .balance-item span {
         font-size: 12px;
-      }
-
-      .banner-title {
-        font-size: 22px;
-      }
-
-      .banner-subtitle {
-        font-size: 16px;
       }
     }
 
@@ -211,15 +161,59 @@
       .balance-item span {
         font-size: 10px;
       }
-
-      .banner-title {
-        font-size: 18px;
-      }
-
-      .banner-subtitle {
-        font-size: 12px;
-      }
     }
+
+    .background-layer {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background-color: #222;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .background-layer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('your-image-path.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .background-layer .logo-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+    }
+
+    .background-layer .logo-number img {
+      margin-right: 10px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .background-layer .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 3;
+    }
+
   </style>
 </head>
 <body>
@@ -233,32 +227,26 @@
 
     <div class="balance-section">
       <div class="balance-item">
-        <div class="background-layer"></div>
-        <div class="content-layer">
-          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
-          <span>1928283883737</span>
-        </div>
-        <div class="image-cover-layer"></div>
-        <div class="overlay-layer"></div>
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+        <span>1928283883737</span>
       </div>
       <div class="balance-item">
-        <div class="background-layer"></div>
-        <div class="content-layer">
-          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-          <span>37373663737383833</span>
-        </div>
-        <div class="image-cover-layer"></div>
-        <div class="overlay-layer"></div>
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+        <span>37373663737383833</span>
       </div>
       <div class="balance-item">
-        <div class="background-layer"></div>
-        <div class="content-layer">
-          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-          <span>7337733663638833</span>
-        </div>
-        <div class="image-cover-layer"></div>
-        <div class="overlay-layer"></div>
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+        <span>7337733663638833</span>
       </div>
+    </div>
+
+    <!-- Background with layers -->
+    <div class="background-layer">
+      <div class="logo-number">
+        <img src="logo.png" alt="Logo">
+        <span>1234567890</span>
+      </div>
+      <div class="cover"></div>
     </div>
 
     <div class="image-gallery">
@@ -282,18 +270,7 @@
   </div>
 
   <script>
-    function checkStorageAndDownload(sizeInZB) {
-      if (navigator.storage && navigator.storage.estimate) {
-        navigator.storage.estimate().then((storage) => {
-          if (storage.quota < sizeInZB) {
-            alert("Insufficient storage space");
-          } else {
-            alert("Download can proceed");
-            // Add your download functionality here
-          }
-        });
-      }
-    }
+    // Your existing JavaScript code...
   </script>
 </body>
 </html>
