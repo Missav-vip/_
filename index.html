@@ -13,8 +13,6 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
       overflow: hidden;
     }
 
@@ -39,6 +37,28 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      animation: glowAnimation 1.5s infinite alternate, mutateAnimation 3s infinite;
+    }
+
+    @keyframes glowAnimation {
+      0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    @keyframes mutateAnimation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
     .banner-title {
@@ -53,15 +73,44 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
+    @media (max-width: 480px) {
+      .banner {
+        height: 100px;
+      }
+      .banner-title { font-size: 18px; }
+      .banner-subtitle { font-size: 14px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .banner {
+        height: 150px;
+      }
+      .banner-title { font-size: 22px; }
+      .banner-subtitle { font-size: 18px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .banner {
+        height: 200px;
+      }
+      .banner-title { font-size: 26px; }
+      .banner-subtitle { font-size: 20px; }
+    }
+
+    @media (min-width: 1025px) {
+      .banner {
+        height: 300px;
+      }
+      .banner-title { font-size: 32px; }
+      .banner-subtitle { font-size: 24px; }
+    }
+
     .balance-section {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       margin-top: 20px;
-      flex-wrap: wrap;
       gap: 15px;
-      background-color: #222; /* Added full width background */
-      padding: 10px;
-      border-radius: 10px;
+      flex-wrap: wrap;
     }
 
     .balance-item {
@@ -72,9 +121,10 @@
       margin-bottom: 15px;
       padding: 10px;
       border-radius: 10px;
-      transition: transform 0.2s ease-in-out;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-      background-color: #333;
+      transition: transform 0.2s ease-in-out;
+      background: linear-gradient(145deg, rgba(64, 64, 64, 0.7), rgba(32, 32, 32, 0.5));
+      position: relative;
     }
 
     .balance-item:hover {
@@ -89,12 +139,6 @@
       animation: bounce 1s infinite alternate;
     }
 
-    .balance-item span {
-      font-size: 20px;
-      font-family: 'Digital-7', sans-serif; /* LED-like font */
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
     @keyframes bounce {
       0% {
         transform: translateY(0);
@@ -104,7 +148,22 @@
       }
     }
 
-    /* Media Queries */
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .balance-item .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: -1;
+      border-radius: 10px;
+    }
+
     @media (max-width: 768px) {
       .balance-item img {
         width: 30px;
@@ -112,7 +171,7 @@
       }
 
       .balance-item span {
-        font-size: 18px;
+        font-size: 12px;
       }
     }
 
@@ -123,7 +182,7 @@
       }
 
       .balance-item span {
-        font-size: 14px;
+        font-size: 10px;
       }
     }
   </style>
@@ -139,14 +198,17 @@
 
     <div class="balance-section">
       <div class="balance-item">
+        <div class="background-overlay"></div>
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
       <div class="balance-item">
+        <div class="background-overlay"></div>
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
       </div>
       <div class="balance-item">
+        <div class="background-overlay"></div>
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
       </div>
@@ -173,86 +235,19 @@
   </div>
 
   <script>
-    // JavaScript functions (unchanged from your original code)
     function checkStorageAndDownload(sizeInZB) {
       if (navigator.storage && navigator.storage.estimate) {
         navigator.storage.estimate().then((storage) => {
-          const availableSpace = storage.quota - storage.usage;
-          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) {
-            alert('Sufficient storage. Proceeding to download...');
-            checkUserLocation();
+          const availableSpaceInZB = storage.quota / 1e21;
+          if (availableSpaceInZB > sizeInZB) {
+            alert("Space sufficient, downloading...");
           } else {
-            alert('Insufficient storage space for the file.');
+            alert("Not enough space for download.");
           }
-        }).catch((error) => {
-          alert('Error checking storage: ' + error);
         });
       } else {
-        alert('Storage estimation not supported by this browser.');
+        alert("Storage estimation not supported.");
       }
-    }
-
-    function checkUserLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          const highRiskAreas = [
-            { lat: 35.3606, lng: 137.4280 },
-            { lat: 38.2970, lng: 141.0196 }
-          ];
-
-          const isHighRisk = highRiskAreas.some(area => {
-            const distance = Math.sqrt(
-              Math.pow(latitude - area.lat, 2) + Math.pow(longitude - area.lng, 2)
-            );
-            return distance < 0.1;
-          });
-
-          if (isHighRisk) {
-            generateTokenAndDownload();
-          } else {
-            alert('Download is only allowed in high-risk areas.');
-          }
-        }, (error) => {
-          alert('Error getting geolocation: ' + error.message);
-        });
-      } else {
-        alert('Geolocation is not supported by this browser.');
-      }
-    }
-
-    function generateTokenAndDownload() {
-      const token = generateRandomToken();
-      const encryptedToken = encryptToken(token);
-
-      const expirationTime = Date.now() + 24 * 60 * 60 * 1000;
-      sessionStorage.setItem('token', encryptedToken);
-      sessionStorage.setItem('expiration', expirationTime);
-
-      const blob = new Blob([encryptedToken], { type: 'text/plain' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'tokenFile.txt';
-      link.click();
-    }
-
-    function generateRandomToken() {
-      const charset = 'あいうえおかきくけこさしすせそたちつてとにぬねのまみむめもやゆよらりるれろわをんABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let token = '';
-      for (let i = 0; i < 16; i++) {
-        token += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      return token;
-    }
-
-    function encryptToken(token) {
-      const encryptionKey = 'your-encryption-key';
-      let encrypted = '';
-      for (let i = 0; i < token.length; i++) {
-        encrypted += String.fromCharCode(token.charCodeAt(i) ^ encryptionKey.charCodeAt(i % encryptionKey.length));
-      }
-      return encrypted;
     }
   </script>
 </body>
