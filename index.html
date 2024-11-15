@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latar Belakang Saldo dengan Video</title>
+  <title>Latar Belakang dengan Instagram</title>
   <style>
     body {
       margin: 0;
@@ -12,34 +12,28 @@
       color: white;
       font-family: Arial, sans-serif;
       display: flex;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      padding: 10px;
+      flex-direction: column;
+      align-items: center;
     }
 
     .banner {
       background-color: #111;
       width: 100%;
+      max-width: 1200px;
       height: 200px;
-      margin: 10px auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       color: white;
       text-align: center;
       border-radius: 10px;
+      margin: 20px 0;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
 
     .banner-title {
       font-size: 32px;
-      margin: 10px 0;
+      margin: 0;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
@@ -48,90 +42,77 @@
       width: 100%;
       max-width: 1200px;
       height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      border-radius: 10px;
+      margin: 20px 0;
       overflow: hidden;
-      margin: 20px auto;
+      border-radius: 10px;
     }
 
-    .balance-section video {
+    .instagram-video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border: none;
       z-index: -1;
     }
 
-    .balance-item {
+    .balance-items {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      margin: 0 15px;
-      color: white;
+      height: 100%;
+      position: relative;
       z-index: 1;
-    }
-
-    .balance-item img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-      animation: bounce 1s infinite alternate;
-    }
-
-    .balance-item span {
-      font-size: 14px;
+      color: white;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
+    .balance-item {
+      margin: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .balance-item img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
     }
 
     @media (max-width: 768px) {
       .balance-item img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .balance-item span {
-        font-size: 12px;
+        width: 40px;
+        height: 40px;
       }
     }
 
     @media (max-width: 480px) {
       .balance-item img {
-        width: 20px;
-        height: 20px;
-      }
-
-      .balance-item span {
-        font-size: 10px;
+        width: 30px;
+        height: 30px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="banner">
-      <h1 class="banner-title">Nama Web</h1>
-    </div>
+  <div class="banner">
+    <h1 class="banner-title">Nama Web</h1>
+  </div>
 
-    <div class="balance-section">
-      <video autoplay muted loop>
-        <source src="https://raw.githubusercontent.com/Missav-vip/_/7bea1423ee6b2542a3c635deb096a9bea31a5f89/background%20.mp4" type="video/mp4">
-        Browser Anda tidak mendukung video HTML5.
-      </video>
+  <div class="balance-section">
+    <!-- Video Instagram -->
+    <iframe 
+      class="instagram-video"
+      src="https://www.instagram.com/reel/DCZz0XpqVqd/embed"
+      allowfullscreen
+      scrolling="no"
+      frameborder="0">
+    </iframe>
+
+    <!-- Konten Saldo -->
+    <div class="balance-items">
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
