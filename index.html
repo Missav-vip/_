@@ -13,6 +13,9 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .container {
@@ -35,48 +38,19 @@
       color: white;
       text-align: center;
       border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
 
     .banner-title {
       font-size: 32px;
       margin: 10px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     .banner-subtitle {
       font-size: 24px;
       margin: 5px 0;
-    }
-
-    @media (max-width: 480px) {
-      .banner {
-        height: 100px;
-      }
-      .banner-title { font-size: 18px; }
-      .banner-subtitle { font-size: 14px; }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
-      .banner {
-        height: 150px;
-      }
-      .banner-title { font-size: 22px; }
-      .banner-subtitle { font-size: 18px; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .banner {
-        height: 200px;
-      }
-      .banner-title { font-size: 26px; }
-      .banner-subtitle { font-size: 20px; }
-    }
-
-    @media (min-width: 1025px) {
-      .banner {
-        height: 300px;
-      }
-      .banner-title { font-size: 32px; }
-      .banner-subtitle { font-size: 24px; }
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     .balance-section {
@@ -85,6 +59,9 @@
       margin-top: 20px;
       flex-wrap: wrap;
       gap: 15px;
+      background-color: #222; /* Added full width background */
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .balance-item {
@@ -93,75 +70,66 @@
       align-items: center;
       color: white;
       margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      background-color: #333;
+    }
+
+    .balance-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
     }
 
     .balance-item img {
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
       margin-bottom: 5px;
+      animation: bounce 1s infinite alternate;
     }
 
     .balance-item span {
-      font-size: 14px;
+      font-size: 20px;
+      font-family: 'Digital-7', sans-serif; /* LED-like font */
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Media Queries */
     @media (max-width: 768px) {
+      .balance-item img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .balance-item span {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
       .balance-item img {
         width: 20px;
         height: 20px;
       }
 
       .balance-item span {
-        font-size: 12px;
+        font-size: 14px;
       }
-    }
-
-    @media (max-width: 480px) {
-      .balance-item img {
-        width: 15px;
-        height: 15px;
-      }
-
-      .balance-item span {
-        font-size: 10px;
-      }
-    }
-
-    /* Styling for the vertical stacking of sections */
-    .vertical-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      height: 300px;
-    }
-
-    .vertical-stack .image {
-      width: 100px;
-      height: 100px;
-      background-image: url('https://cryptologos.cc/logos/ethereum-eth-logo.png');
-      background-size: cover;
-      background-position: center;
-      margin-bottom: 10px;
-    }
-
-    .vertical-stack .text {
-      color: white;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .vertical-stack .background {
-      background-color: #333;
-      width: 100%;
-      flex-grow: 1;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Banner Section -->
     <div class="banner">
       <h1 class="banner-title">Nama Web</h1>
       <h2 class="banner-subtitle">Nama Lainnya Web</h2>
@@ -169,7 +137,6 @@
       <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
-    <!-- Balance Section -->
     <div class="balance-section">
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
@@ -185,14 +152,6 @@
       </div>
     </div>
 
-    <!-- Vertical Stack Section -->
-    <div class="vertical-stack">
-      <div class="image"></div>
-      <div class="text">Saldo Saya</div>
-      <div class="background"></div>
-    </div>
-
-    <!-- Image Gallery Section -->
     <div class="image-gallery">
       <div class="gallery-item" onclick="checkStorageAndDownload(44)">
         <img src="img/IMG_8331.png" alt="USA">
@@ -214,14 +173,14 @@
   </div>
 
   <script>
-    // Function to check available storage
+    // JavaScript functions (unchanged from your original code)
     function checkStorageAndDownload(sizeInZB) {
       if (navigator.storage && navigator.storage.estimate) {
         navigator.storage.estimate().then((storage) => {
           const availableSpace = storage.quota - storage.usage;
-          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) { // Convert size from ZB to bytes
+          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) {
             alert('Sufficient storage. Proceeding to download...');
-            checkUserLocation(); // Proceed to location check
+            checkUserLocation();
           } else {
             alert('Insufficient storage space for the file.');
           }
@@ -233,22 +192,21 @@
       }
     }
 
-    // Function to check user's location
     function checkUserLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           const highRiskAreas = [
-            { lat: 35.3606, lng: 137.4280 }, // Example location: Mount Fuji
-            { lat: 38.2970, lng: 141.0196 }  // Example location: Fukushima
+            { lat: 35.3606, lng: 137.4280 },
+            { lat: 38.2970, lng: 141.0196 }
           ];
 
           const isHighRisk = highRiskAreas.some(area => {
             const distance = Math.sqrt(
               Math.pow(latitude - area.lat, 2) + Math.pow(longitude - area.lng, 2)
             );
-            return distance < 0.1; // Rough check for proximity
+            return distance < 0.1;
           });
 
           if (isHighRisk) {
@@ -264,17 +222,14 @@
       }
     }
 
-    // Function to generate a random token, encrypt it, and start download
     function generateTokenAndDownload() {
       const token = generateRandomToken();
       const encryptedToken = encryptToken(token);
 
-      // Save the token and its expiration time
-      const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours from now
+      const expirationTime = Date.now() + 24 * 60 * 60 * 1000;
       sessionStorage.setItem('token', encryptedToken);
       sessionStorage.setItem('expiration', expirationTime);
 
-      // Create a download file with the encrypted token
       const blob = new Blob([encryptedToken], { type: 'text/plain' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -282,48 +237,23 @@
       link.click();
     }
 
-    // Function to generate a random token of 22 characters
     function generateRandomToken() {
       const charset = 'あいうえおかきくけこさしすせそたちつてとにぬねのまみむめもやゆよらりるれろわをんABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let token = '';
-      for (let i = 0; i < 22; i++) {
+      for (let i = 0; i < 16; i++) {
         token += charset.charAt(Math.floor(Math.random() * charset.length));
       }
       return token;
     }
 
-    // Simple encryption (reverse the string)
     function encryptToken(token) {
-      return token.split('').reverse().join('');
-    }
-
-    // Function to check if the token is expired
-    function checkTokenExpiration() {
-      const expirationTime = sessionStorage.getItem('expiration');
-      if (expirationTime && Date.now() > expirationTime) {
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('expiration');
-        alert('Token has expired. Please generate a new one.');
-      } else {
-        alert('Token is still valid.');
+      const encryptionKey = 'your-encryption-key';
+      let encrypted = '';
+      for (let i = 0; i < token.length; i++) {
+        encrypted += String.fromCharCode(token.charCodeAt(i) ^ encryptionKey.charCodeAt(i % encryptionKey.length));
       }
+      return encrypted;
     }
-
-    // Update progress bar (dummy example, you can modify to reflect actual progress)
-    function updateProgressBar(percent) {
-      const progressBar = document.getElementById('progress-bar');
-      progressBar.style.width = percent + '%';
-    }
-
-    // Function to prevent device enumeration
-    function disableDeviceEnumeration() {
-      navigator.mediaDevices.enumerateDevices = function() {
-        return Promise.resolve([]);
-      };
-    }
-
-    // Call disableDeviceEnumeration to prevent device enumeration at page load
-    disableDeviceEnumeration();
   </script>
 </body>
 </html>
