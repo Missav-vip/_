@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner Video dengan Teks di Dalam</title>
+  <title>Latar Belakang Saldo dengan Video</title>
   <style>
     body {
       margin: 0;
@@ -23,6 +23,7 @@
     }
 
     .banner {
+      background-color: #111; /* Warna latar belakang pengganti jika video gagal dimuat */
       width: 100%;
       height: 200px;
       margin: 10px auto;
@@ -34,58 +35,47 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .banner iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      z-index: -1; /* Agar video berada di belakang teks */
     }
 
     .banner-title {
       font-size: 32px;
       margin: 10px 0;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      z-index: 1;
-    }
-
-    .banner-subtitle {
-      font-size: 24px;
-      margin: 5px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      z-index: 1;
     }
 
     .balance-section {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      height: 300px;
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 15px;
+      align-items: center;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      overflow: hidden; /* Agar video tidak keluar dari kotak */
+      margin: 20px auto;
+    }
+
+    /* Video sebagai latar belakang */
+    .balance-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Video berada di belakang konten */
     }
 
     .balance-item {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0 15px;
       color: white;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 10px;
-      position: relative;
-      transition: transform 0.2s ease-in-out;
-      background-color: transparent;
-    }
-
-    .balance-item:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+      z-index: 1; /* Konten saldo berada di atas video */
     }
 
     .balance-item img {
@@ -93,6 +83,11 @@
       height: 40px;
       margin-bottom: 5px;
       animation: bounce 1s infinite alternate;
+    }
+
+    .balance-item span {
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     @keyframes bounce {
@@ -104,22 +99,6 @@
       }
     }
 
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    /* Gambar tambahan di atas balance */
-    .additional-image {
-      width: 40px; /* Ukuran gambar tambahan yang sama dengan gambar utama */
-      height: 40px;
-      position: absolute;
-      top: -45px; /* Menempatkan gambar di atas logo */
-      left: 0; /* Menjaga agar gambar tidak bergeser ke samping */
-      display: block;
-      z-index: 2; /* Agar gambar tambahan berada di atas overlay */
-    }
-
     @media (max-width: 768px) {
       .balance-item img {
         width: 30px;
@@ -128,12 +107,6 @@
 
       .balance-item span {
         font-size: 12px;
-      }
-
-      .additional-image {
-        width: 30px;
-        height: 30px;
-        top: -35px; /* Sesuaikan untuk perangkat lebih kecil */
       }
     }
 
@@ -146,41 +119,32 @@
       .balance-item span {
         font-size: 10px;
       }
-
-      .additional-image {
-        width: 25px;
-        height: 25px;
-        top: -30px; /* Sesuaikan lebih lanjut untuk perangkat lebih kecil */
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Banner -->
     <div class="banner">
-      <!-- Video YouTube Embed -->
-      <iframe src="https://www.youtube.com/embed/s0m86h0jxnY?autoplay=1&mute=1&loop=1&playlist=s0m86h0jxnY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <!-- Teks di atas video -->
       <h1 class="banner-title">Nama Web</h1>
-      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
-      <h3 class="banner-subtitle">Nama Lainnya</h3>
-      <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
+    <!-- Bagian Saldo dengan latar belakang video -->
     <div class="balance-section">
+      <video autoplay muted loop>
+        <source src="https://raw.githubusercontent.com/username/repository/branch/path/video.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video HTML5.
+      </video>
+      <!-- Konten Saldo -->
       <div class="balance-item">
-        <!-- Gambar tambahan di atas balance -->
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
       </div>
       <div class="balance-item">
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
         <span>37373663737383833</span>
       </div>
       <div class="balance-item">
-        <img src="IMG_8405.png" alt="Gambar di atas Balance" class="additional-image">
         <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
         <span>7337733663638833</span>
       </div>
