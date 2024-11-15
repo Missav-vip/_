@@ -40,7 +40,6 @@
       animation: glowAnimation 1.5s infinite alternate;
     }
 
-    /* Glowing animation */
     @keyframes glowAnimation {
       0% {
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
@@ -94,6 +93,59 @@
       .banner-subtitle { font-size: 24px; }
     }
 
+    .photo-carousel a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .photo-item div {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .image-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 10px 0;
+    }
+
+    .gallery-item {
+      flex: 0 0 auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      background-color: #333;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .gallery-item div {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 5px;
+      font-size: 14px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
     .balance-section {
       display: flex;
       justify-content: center;
@@ -126,7 +178,6 @@
       animation: bounce 1s infinite alternate;
     }
 
-    /* Glowing animation for balance items */
     @keyframes bounce {
       0% {
         transform: translateY(0);
@@ -162,58 +213,6 @@
         font-size: 10px;
       }
     }
-
-    .background-layer {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      background-color: #222;
-      overflow: hidden;
-      border-radius: 10px;
-    }
-
-    .background-layer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('your-image-path.jpg');
-      background-size: cover;
-      background-position: center;
-      z-index: 1;
-    }
-
-    .background-layer .logo-number {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: white;
-    }
-
-    .background-layer .logo-number img {
-      margin-right: 10px;
-      width: 40px;
-      height: 40px;
-    }
-
-    .background-layer .cover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: 3;
-    }
-
   </style>
 </head>
 <body>
@@ -240,15 +239,6 @@
       </div>
     </div>
 
-    <!-- Background with layers -->
-    <div class="background-layer">
-      <div class="logo-number">
-        <img src="logo.png" alt="Logo">
-        <span>1234567890</span>
-      </div>
-      <div class="cover"></div>
-    </div>
-
     <div class="image-gallery">
       <div class="gallery-item" onclick="checkStorageAndDownload(44)">
         <img src="img/IMG_8331.png" alt="USA">
@@ -270,7 +260,20 @@
   </div>
 
   <script>
-    // Your existing JavaScript code...
+    function checkStorageAndDownload(sizeInZB) {
+      if (navigator.storage && navigator.storage.estimate) {
+        navigator.storage.estimate().then((storage) => {
+          const availableSpace = storage.quota - storage.usage;
+          if (availableSpace >= sizeInZB * Math.pow(1024, 3)) {
+            window.location.href = 'your-download-url';
+          } else {
+            alert('Insufficient storage space.');
+          }
+        });
+      } else {
+        alert('Storage API not supported.');
+      }
+    }
   </script>
 </body>
 </html>
