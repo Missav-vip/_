@@ -3,39 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Balance Section with 4 Layers</title>
+  <title>Balance with Image and Logo</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #000;
-      color: white;
       font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
     }
 
+    /* Wadah untuk konten */
     .balance-section {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      gap: 20px;
       flex-wrap: wrap;
-      gap: 15px;
+      padding: 10px;
     }
 
+    /* Setiap item balance */
     .balance-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: white;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 10px;
       position: relative;
-      width: 200px; /* Added width for consistency */
-      height: 250px; /* Added height */
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      max-width: 350px;
+      margin: 10px;
+      border-radius: 10px;
       overflow: hidden;
     }
 
-    /* Layer 1: Background color */
+    /* Latar belakang gambar */
     .balance-item::before {
       content: '';
       position: absolute;
@@ -43,113 +42,90 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.7); /* Transparent black */
-      z-index: 1;
+      background-image: url('your-background-image.jpg'); /* Ganti dengan URL gambar latar belakang */
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 0.7;
     }
 
-    /* Layer 2: Background Image */
+    /* Gambar yang menutupi area */
     .balance-item img.background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      object-fit: cover;
-      z-index: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+      z-index: -2;
     }
 
-    /* Layer 3: Logo and Numbers */
-    .balance-item .logo-and-number {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
+    /* Logo dan angka */
+    .balance-item .logo {
+      width: 60px;
+      height: 60px;
+      margin: 20px auto 10px;
     }
 
-    .balance-item img.logo {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-    }
-
-    .balance-item span {
-      font-size: 18px;
+    .balance-item .amount {
+      font-size: 20px;
+      color: white;
+      text-align: center;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    /* Layer 4: Top Image (Covering Entire Item) */
-    .balance-item .overlay-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 3;
-      background-image: url('https://cryptologos.cc/logos/ethereum-eth-logo.png'); /* Your image here */
-      background-size: cover;
-      opacity: 0.3; /* Adjust opacity to make the image overlay more subtle */
-    }
-
-    /* Hover Effect */
-    .balance-item:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-    }
-
+    /* Menjaga responsivitas */
     @media (max-width: 768px) {
-      .balance-item img.logo {
-        width: 30px;
-        height: 30px;
+      .balance-item {
+        max-width: 300px;
       }
 
-      .balance-item span {
-        font-size: 14px;
+      .balance-item .logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .balance-item .amount {
+        font-size: 16px;
       }
     }
 
     @media (max-width: 480px) {
-      .balance-item img.logo {
-        width: 20px;
-        height: 20px;
+      .balance-item {
+        max-width: 250px;
       }
 
-      .balance-item span {
-        font-size: 12px;
+      .balance-item .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .balance-item .amount {
+        font-size: 14px;
       }
     }
+
   </style>
 </head>
 <body>
   <div class="balance-section">
+    <!-- Balance Item 1 -->
     <div class="balance-item">
-      <img class="background" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Background Image">
-      <div class="logo-and-number">
-        <img class="logo" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
-        <span>1928283883737</span>
-      </div>
-      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
+      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo" class="logo">
+      <div class="amount">1928283883737</div>
+      <img src="https://example.com/your-image.jpg" alt="ETH Image" class="background">
+    </div>
+    
+    <!-- Balance Item 2 -->
+    <div class="balance-item">
+      <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo" class="logo">
+      <div class="amount">37373663737383833</div>
+      <img src="https://example.com/your-image.jpg" alt="BTC Image" class="background">
     </div>
 
+    <!-- Balance Item 3 -->
     <div class="balance-item">
-      <img class="background" src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Background Image">
-      <div class="logo-and-number">
-        <img class="logo" src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-        <span>37373663737383833</span>
-      </div>
-      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
-    </div>
-
-    <div class="balance-item">
-      <img class="background" src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Background Image">
-      <div class="logo-and-number">
-        <img class="logo" src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-        <span>7337733663638833</span>
-      </div>
-      <div class="overlay-image"></div> <!-- Top Image (Layer 4) -->
+      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo" class="logo">
+      <div class="amount">7337733663638833</div>
+      <img src="https://example.com/your-image.jpg" alt="USDT Image" class="background">
     </div>
   </div>
 </body>
