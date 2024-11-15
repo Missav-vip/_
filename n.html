@@ -64,11 +64,21 @@
       flex-wrap: wrap;
       gap: 15px;
       position: relative;
-      background-image: url('https://github.com/Missav-vip/_?tab=readme-ov-file'); /* Menambahkan latar belakang GIF di bagian saldo */
-      background-size: cover;
-      background-position: center;
+      background-color: transparent;
       padding: 20px;
       border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Menambahkan video sebagai latar belakang di balance-section */
+    .balance-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 300px; /* Ukuran tinggi video */
+      object-fit: cover; /* Agar video menutupi seluruh area */
+      z-index: -1; /* Agar video berada di belakang elemen lainnya */
     }
 
     .balance-item {
@@ -109,6 +119,10 @@
       .balance-item span {
         font-size: 12px;
       }
+
+      .balance-section video {
+        height: 200px; /* Menyesuaikan ukuran video untuk perangkat lebih kecil */
+      }
     }
 
     @media (max-width: 480px) {
@@ -120,6 +134,10 @@
       .balance-item span {
         font-size: 10px;
       }
+
+      .balance-section video {
+        height: 150px; /* Menyesuaikan ukuran video lebih kecil lagi */
+      }
     }
   </style>
 </head>
@@ -130,6 +148,12 @@
     </div>
 
     <div class="balance-section">
+      <!-- Menambahkan video sebagai latar belakang -->
+      <video autoplay muted loop>
+        <source src="https://github-production-user-asset-6210df.s3.amazonaws.com/187007458/386796418-19849254-2543-4390-a666-0566d2989949.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20241115%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241115T234457Z&X-Amz-Expires=300&X-Amz-Signature=593da98099ad4a0c61cdca9ff3a197c5bc6af1c2c9b7aaf1ea053c0332c31ffd&X-Amz-SignedHeaders=host" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
         <span>1928283883737</span>
