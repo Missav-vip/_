@@ -3,56 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website dengan Latar Belakang Video</title>
+  <title>Upload Video</title>
   <style>
-    /* Mengatur tampilan latar belakang dan konten */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    body {
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      height: 100vh;
+      background-color: #f0f0f0;
     }
 
-    /* Video latar belakang */
-    video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-
-    /* Konten di atas video */
-    .content {
+    .upload-container {
       text-align: center;
-      color: white;
-      z-index: 1;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
-      font-size: 3rem;
-      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    input[type="file"] {
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
-  <!-- Video sebagai latar belakang -->
-  <video autoplay muted loop>
-    <source src="videos/your-video.mp4" type="video/mp4">
-    Browser Anda tidak mendukung video latar belakang.
-  </video>
-
-  <!-- Konten lainnya di atas video -->
-  <div class="content">
-    <h1>Selamat Datang di Website Saya</h1>
-    <p>Video ini berputar sebagai latar belakang.</p>
+  <div class="upload-container">
+    <h1>Upload Video</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="video" accept="video/*" required><br>
+      <button type="submit">Upload Video</button>
+    </form>
+    <div id="message"></div>
   </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let formData = new FormData(this);
+      fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('message').innerHTML = data;
+        // Setelah upload berhasil, tampilkan video sebagai latar belakang
+        const videoFilename = data.split(": ")[1];
+        const videoURL = `http://localhost:3000/video/${videoFilename}`;
+        document.body.style.background = `url(${videoURL}) no-repeat center center fixed`;
+      })
+      .catch(error => {
+        console.error(error);
+        document.getElementById('message').innerHTML = 'Gagal meng-upload video.';
+      });
+    });
+  </script>
 
 </body>
 </html>
