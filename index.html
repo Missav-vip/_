@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner dengan Embed Instagram</title>
+  <title>Video Background</title>
   <style>
     body {
       margin: 0;
@@ -13,84 +13,76 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      overflow: hidden;
     }
 
     .container {
       width: 100%;
       max-width: 1200px;
-      padding: 10px;
-    }
-
-    .banner {
-      background-image: url('IMG_8432.gif');
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      height: 200px;
-      margin: 10px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
       text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      position: relative;
     }
 
     .balance-section {
-      margin-top: 20px;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
+      height: 300px; /* Tinggi bagian saldo */
+      position: relative;
+      overflow: hidden;
       border-radius: 10px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
     }
 
-    iframe {
+    /* Video Sebagai Background */
+    .balance-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 500px;
-      height: 500px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      height: 100%;
+      object-fit: cover; /* Menutupi area dengan proporsi yang benar */
+      z-index: -1; /* Di belakang konten lain */
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      padding: 20px;
     }
 
     .balance-item {
-      margin-top: 20px;
-      color: white;
-      font-size: 16px;
-      text-align: center;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .balance-section {
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .balance-section {
+        height: 150px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="banner">
-      <h1>Nama Web</h1>
-    </div>
-
+    <h1>Nama Web</h1>
     <div class="balance-section">
-      <h2>Saldo Anda</h2>
-      <!-- Embed video Instagram -->
-      <iframe 
-        src="https://www.instagram.com/reel/DCZz0XpqVqd/embed" 
-        frameborder="0" 
-        scrolling="no" 
-        allowtransparency="true" 
-        allow="encrypted-media">
-      </iframe>
-
-      <div class="balance-item">
-        <p>ETH: 1928283883737</p>
-        <p>BTC: 37373663737383833</p>
-        <p>USDT: 7337733663638833</p>
+      <!-- Gunakan file video yang telah diunduh -->
+      <video autoplay muted loop>
+        <source src="video.mp4" type="video/mp4">
+        Browser Anda tidak mendukung tag video.
+      </video>
+      <div class="content">
+        <p class="balance-item">ETH: 1928283883737</p>
+        <p class="balance-item">BTC: 37373663737383833</p>
+        <p class="balance-item">USDT: 7337733663638833</p>
       </div>
     </div>
   </div>
