@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banner dengan Overlay</title>
+  <title>Banner dengan Embed Instagram</title>
   <style>
     body {
       margin: 0;
@@ -13,7 +13,9 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      overflow: hidden;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
@@ -37,134 +39,58 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      position: relative;
-    }
-
-    .banner-title {
-      font-size: 32px;
-      margin: 10px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      z-index: 1;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0); /* Penutup transparan */
-      z-index: 2; /* Agar overlay menutupi gambar */
     }
 
     .balance-section {
+      margin-top: 20px;
+      width: 100%;
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 15px;
-      position: relative;
-      background-color: transparent;
-      padding: 20px;
+      flex-direction: column;
+      align-items: center;
       border-radius: 10px;
-      overflow: hidden;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
-    /* Menambahkan video sebagai latar belakang di balance-section */
-    .balance-section video {
-      position: absolute;
-      top: 0;
-      left: 0;
+    iframe {
       width: 100%;
-      height: 300px; /* Ukuran tinggi video */
-      object-fit: cover; /* Agar video menutupi seluruh area */
-      z-index: -1; /* Agar video berada di belakang elemen lainnya */
+      max-width: 500px;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     }
 
     .balance-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin-top: 20px;
       color: white;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 10px;
-      position: relative;
-      transition: transform 0.2s ease-in-out;
-      background-color: transparent;
-    }
-
-    .balance-item:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba();
-    }
-
-    .balance-item img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-    }
-
-    .balance-item span {
-      font-size: 14px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    @media (max-width: 768px) {
-      .balance-item img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .balance-item span {
-        font-size: 12px;
-      }
-
-      .balance-section video {
-        height: 200px; /* Menyesuaikan ukuran video untuk perangkat lebih kecil */
-      }
-    }
-
-    @media (max-width: 480px) {
-      .balance-item img {
-        width: 20px;
-        height: 20px;
-      }
-
-      .balance-item span {
-        font-size: 10px;
-      }
-
-      .balance-section video {
-        height: 150px; /* Menyesuaikan ukuran video lebih kecil lagi */
-      }
+      font-size: 16px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="banner">
-      <h1 class="banner-title">Nama Web</h1>
+      <h1>Nama Web</h1>
     </div>
 
     <div class="balance-section">
-      <!-- Menambahkan video sebagai latar belakang -->
-      <video autoplay muted loop>
-        <source src="https://github-production-user-asset-6210df.s3.amazonaws.com/187007458/386796418-19849254-2543-4390-a666-0566d2989949.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20241115%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241115T234457Z&X-Amz-Expires=300&X-Amz-Signature=593da98099ad4a0c61cdca9ff3a197c5bc6af1c2c9b7aaf1ea053c0332c31ffd&X-Amz-SignedHeaders=host" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <h2>Saldo Anda</h2>
+      <!-- Embed video Instagram -->
+      <iframe 
+        src="https://www.instagram.com/reel/DCZz0XpqVqd/embed" 
+        frameborder="0" 
+        scrolling="no" 
+        allowtransparency="true" 
+        allow="encrypted-media">
+      </iframe>
 
       <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
-        <span>1928283883737</span>
-      </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
-        <span>37373663737383833</span>
-      </div>
-      <div class="balance-item">
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
-        <span>7337733663638833</span>
+        <p>ETH: 1928283883737</p>
+        <p>BTC: 37373663737383833</p>
+        <p>USDT: 7337733663638833</p>
       </div>
     </div>
   </div>
